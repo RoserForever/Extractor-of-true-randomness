@@ -36,12 +36,12 @@ class BitMatrix:
     matrix: typing.List[str]
     
     def fill_with_size_and_string_random_source(self, rows: int, columns: int, random_source: RandomReader) -> None:
-        """Fill matrix with random values readed from RandomReader
+        """Fill matrix with random values read from RandomReader
         
         Keyword arguments:
         rows -- ammount of rows
         columns -- ammount of columns
-        random_source -- instance of RandomReader class, able to provide <raws + columns - 1> random values
+        random_source -- instance of RandomReader class, able to provide <rows + columns - 1> random values
         """
         self.rows = rows
         self.columns = columns
