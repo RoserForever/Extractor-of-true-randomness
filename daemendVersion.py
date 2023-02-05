@@ -14,15 +14,15 @@ class RandomReader:
             result_value = self.__file.read(1)
             if len(result_value) == 0: raise EOFError("Can't read random value")
             
-        return RandomReader.get_token_of_lenght(self, 1)
+        return RandomReader.get_token_of_length(self, 1)
         
     
-    def get_token_of_lenght(self, token_lenght: int ) -> str:
+    def get_token_of_length(self, token_length: int ) -> str:
         """Return string token of random bits"""
-        result_value: str = RandomReader.__filter_bits(self.__file.read(token_lenght))
+        result_value: str = RandomReader.__filter_bits(self.__file.read(token_length))
         
-        while len(result_value) < token_lenght:
-            result_value += __filter_bits(self.__file.read(token_lenght - result_value))
+        while len(result_value) < token_length:
+            result_value += __filter_bits(self.__file.read(token_length - result_value))
         
         return result_value
     
@@ -46,7 +46,7 @@ class BitMatrix:
         self.rows = rows
         self.columns = columns
         matrix = [None] * rows
-        matrix[0] = random_source.get_token_of_lenght(columns)
+        matrix[0] = random_source.get_token_of_length(columns)
         
         for row_number in range(1, rows):
             matrix[row_number] = random_source.get_next_bit()
@@ -68,17 +68,17 @@ class BitMatrix:
         return self.matrix[key]
 
 
-def find_max_occurence_token(input_data_string: str, token_lenght: int) -> typing.Tuple[str, int]:
+def find_max_occurence_token(input_data_string: str, token_length: int) -> typing.Tuple[str, int]:
     """Return the token with the most occurrences and the number of occurrences
         
     Keyword arguments:
     input_data_string -- string to be parsed
-    token_lenght -- lenght of word
+    token_length -- length of word
     """
     tokens_dict : Dict[str, int] = dict()
     
-    for token_begin_index in range(0, len(input_data_string), token_lenght):
-        buffered_value: str = input_data_string[token_begin_index:token_begin_index + token_lenght]
+    for token_begin_index in range(0, len(input_data_string), token_length):
+        buffered_value: str = input_data_string[token_begin_index:token_begin_index + token_length]
         tokens_dict[buffered_value] = tokens_dict.get(buffered_value, 0) + 1
         
     maximum_occurrence: int = 0
